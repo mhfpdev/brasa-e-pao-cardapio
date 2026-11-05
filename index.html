@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#24180f" />
+  <meta name="description" content="O sabor da brasa na medida certa. Confira nosso cardápio e monte seu pedido." />
+  <title>Brasa & Pão — Hambúrgueres de verdade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="top-note"><span class="spark">✳</span> <span id="top-message">Sabor de verdade, feito na hora</span> <span class="spark">✳</span></div>
+  <header class="site-header">
+    <a href="#inicio" class="brand" aria-label="Brasa e Pão, voltar ao início">
+      <span class="brand-mark"><span class="brand-flame">♨</span></span>
+      <span class="brand-name">BRASA <em>&</em> PÃO<span class="brand-period">.</span></span>
+    </a>
+    <nav class="header-nav" aria-label="Navegação principal">
+      <a href="#cardapio">Cardápio</a><a href="#sobre">Nossa história</a><a href="#funcionamento">Horários</a>
+    </nav>
+    <button type="button" class="cart-trigger" id="header-cart" aria-label="Abrir sacola de pedidos">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 8h16l-1.3 12H5.3L4 8Zm4 0V6a4 4 0 0 1 8 0v2"/></svg>
+      <span>Sacola</span><b id="header-cart-count">0</b>
+    </button>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-background" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> HAMBURGUERIA ARTESANAL <span class="eyebrow-line"></span></div>
+        <h1>O sabor que<br>acende a <span>fome.</span></h1>
+        <p id="hero-subtitle">Smash no ponto, pão macio e aquele sabor de brasa que dá vontade de voltar.</p>
+        <div class="hero-actions"><a class="primary-btn" href="#cardapio">Explorar cardápio <span>↗</span></a><a class="hero-quiet" href="#funcionamento">Horários de funcionamento <span>→</span></a></div>
+        <div class="hero-feature"><span class="mini-flame">✦</span> Ingredientes selecionados <span class="feature-dot">·</span> Feito na hora</div>
+      </div>
+      <div class="hero-photo" aria-hidden="true">
+        <div class="photo-halo"></div>
+        <img class="hero-local" src="./assets/hero-burger.svg" alt="" />
+        <img class="hero-external" src="https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="" loading="eager" onerror="this.style.opacity='0'" />
+        <div class="hero-seal"><span>100%</span><small>SABOR<br>DE BRASA</small></div>
+      </div>
+    </section>
+
+    <div class="benefits" aria-label="Destaques"><span><i>✺</i> Hambúrguer feito na hora</span><span><i>✺</i> Ingredientes de primeira</span><span><i>✺</i> Sabor de outro nível</span></div>
+
+    <section id="cardapio" class="menu-section container">
+      <div class="section-intro"><div><span class="kicker">O QUE SAI DA NOSSA CHAPA</span><h2>Escolha sua<br><em>próxima paixão.</em></h2></div><p>Do clássico que não tem erro ao exagerado que vale cada mordida. Encontra o teu favorito.</p></div>
+      <div class="menu-toolbar">
+        <div class="filter-list" id="filters" role="group" aria-label="Filtrar por categoria"></div>
+        <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg><input type="search" id="search" placeholder="Buscar no cardápio..." aria-label="Pesquisar produtos" autocomplete="off"></label>
+      </div>
+      <div class="menu-topline"><p id="result-label">Preparando nosso cardápio...</p><span>ESCOLHA & APROVEITE</span></div>
+      <div id="menu-grid" class="menu-grid" aria-live="polite"><div class="loading-products">Preparando o cardápio... <span>✳</span></div></div>
+    </section>
+
+    <section class="banner" id="sobre"><div class="banner-art"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="banner-spark">✳</span><div class="banner-stamp">F</div></div><div class="banner-copy"><span class="kicker light">NOSSO JEITO DE FAZER</span><h2>Não é só<br>hambúrguer.<br><em>É ritual.</em></h2><p>Chapa quente, ingredientes honestos e respeito por cada pedido. Aqui, a gente acredita que comida boa não precisa de complicação — só de capricho.</p><a href="#cardapio">Encontre seu favorito <span>↗</span></a></div></section>
+
+    <section id="funcionamento" class="hours-section container"><div><span class="kicker">BATEU A FOME?</span><h2>Deu a hora<br>da <em>brasa.</em></h2><p>Confere nossos horários e escolhe o melhor momento pra matar a vontade.</p><div class="open-pill" id="open-status"><span class="status-dot"></span> Consultando horários...</div></div><div class="hours-card"><div class="hours-card-head"><span>HORÁRIOS DA CASA</span><span>✳</span></div><div id="hours-list"><p>Carregando...</p></div><div class="hours-foot">Os horários podem mudar em feriados e datas especiais.</div></div></section>
+  </main>
+
+  <footer><div class="footer-inner container"><div><div class="footer-brand">BRASA <em>&</em> PÃO<span>.</span></div><p>Feito com fogo. Servido com vontade.</p></div><div class="footer-right"><a href="#inicio">Voltar ao topo ↑</a><small>© <span id="year"></span> Brasa & Pão</small></div></div></footer>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="drawer-head"><div><small>SEU PEDIDO</small><h2 id="cart-title">Minha sacola <span id="drawer-count">(0)</span></h2></div><button id="close-cart" class="icon-button" aria-label="Fechar sacola">×</button></div>
+    <div id="cart-items" class="drawer-items"></div>
+    <div id="cart-checkout" class="drawer-checkout">
+      <div class="delivery-types" role="group" aria-label="Tipo de pedido"><button data-method="retirada" class="selected" type="button">Retirar no local</button><button data-method="entrega" type="button">Entrega</button></div>
+      <label class="field-label">Seu nome <input id="customer-name" type="text" maxlength="70" placeholder="Como podemos te chamar?"></label>
+      <label class="field-label" id="address-wrap" hidden>Endereço para entrega <input id="customer-address" type="text" maxlength="220" placeholder="Rua, número, bairro e referência"></label>
+      <label class="field-label">Observações <textarea id="order-note" rows="2" maxlength="450" placeholder="Ex.: sem cebola, ponto da carne..."></textarea></label>
+      <div class="price-summary"><div><span>Subtotal</span><b id="cart-subtotal">R$ 0,00</b></div><div id="delivery-row" hidden><span>Entrega</span><b id="cart-delivery">R$ 0,00</b></div><div class="grand-total"><span>Total</span><strong id="cart-total">R$ 0,00</strong></div></div>
+      <button type="button" class="checkout-btn" id="checkout-btn">Copiar resumo do pedido <span>→</span></button><small class="checkout-hint">Confira o pedido antes de finalizar.</small>
+    </div>
+  </aside>
+  <button class="mobile-cart" id="mobile-cart" type="button"><span>🛍 Sacola <b id="mobile-count">0</b></span><span id="mobile-cart-total">R$ 0,00</span></button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
