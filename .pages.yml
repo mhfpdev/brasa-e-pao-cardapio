@@ -1,3 +1,5 @@
+# Painel visual para o Pages CMS: https://app.pagescms.org/
+# O estabelecimento edita pelo celular; o Pages CMS salva as alterações no GitHub.
 media:
   input: assets
   output: /assets
@@ -33,25 +35,29 @@ content:
         label: Preço (R$)
         type: number
         required: true
+        description: "Use ponto para centavos. Ex.: 24.90."
         options:
           min: 0
       - name: imagem
         label: Link ou caminho da foto
         type: string
-        description: "Ex.: https://.../foto.jpg ou assets/foto.jpg."
+        description: "Ex.: https://.../foto.jpg ou assets/foto.jpg. É possível enviar fotos na aba de mídia."
       - name: disponivel
         label: Produto disponível
         type: boolean
-        description: "Desmarque para ocultar o produto."
+        description: "Desmarque para ocultar o produto do cardápio."
       - name: destaque
         label: Destaque
         type: boolean
+        description: "Marca o produto como destaque na base de dados."
       - name: etiqueta
         label: Etiqueta na foto
         type: string
+        description: "Opcional. Ex.: MAIS PEDIDO, DA CASA, NOVO. Deixe vazio para não mostrar."
       - name: emoji
-        label: Emoji de reserva
+        label: Emoji usado se a imagem falhar
         type: string
+        description: "Ex.: 🍔 ou 🍟."
 
   - name: horarios
     label: Horários de funcionamento
@@ -62,31 +68,31 @@ content:
       - name: segunda
         label: Segunda-feira
         type: string
-        description: "Vazio significa fechado. Ex.: 18:00-23:00. Dois períodos: 12:00-14:00; 18:00-23:00."
+        description: "Deixe vazio se estiver fechado. Se abrir: 18:00-23:00. Dois períodos: 12:00-14:00; 18:00-23:00. Se fechar após meia-noite: 18:00-02:00."
       - name: terca
         label: Terça-feira
         type: string
-        description: "Use HH:MM-HH:MM. Separe períodos com ponto e vírgula."
+        description: "Ex.: 18:00-23:00. Para fechado, deixe vazio. Para dois períodos, separe com ponto e vírgula (;)."
       - name: quarta
         label: Quarta-feira
         type: string
-        description: "Vazio significa fechado."
+        description: "Formato: HH:MM-HH:MM. Ex.: 18:00-23:00."
       - name: quinta
         label: Quinta-feira
         type: string
-        description: "Ex.: 18:00-23:30."
+        description: "Formato: HH:MM-HH:MM. Pode separar períodos com ;."
       - name: sexta
         label: Sexta-feira
         type: string
-        description: "18:00-02:00 fecha às 2h do dia seguinte."
+        description: "Ex.: 18:00-02:00 indica que fecha às 2h de sábado."
       - name: sabado
         label: Sábado
         type: string
-        description: "Ex.: 12:00-15:00; 18:00-02:00."
+        description: "Ex.: 12:00-15:00; 18:00-02:00 para almoço e jantar."
       - name: domingo
         label: Domingo
         type: string
-        description: "Vazio significa fechado."
+        description: "Se não abrir, deixe completamente vazio."
 
   - name: estabelecimento
     label: Informações da casa
@@ -107,21 +113,24 @@ content:
       - name: whatsapp
         label: WhatsApp que recebe pedidos
         type: string
-        description: "Apenas dígitos com país e DDD. Deixe vazio para copiar o pedido."
+        description: "Código do país + DDD + número, somente dígitos. Ex.: 5511999999999. Deixe vazio se quiser apenas copiar o pedido."
       - name: taxaEntrega
         label: Taxa de entrega em reais
         type: number
+        description: "Ex.: 6.00."
         options:
           min: 0
       - name: entregaAtiva
         label: Aceita entrega
         type: boolean
       - name: retiradaAtiva
-        label: Aceita retirada
+        label: Aceita retirada no local
         type: boolean
       - name: tempoPreparo
         label: Previsão de preparo
         type: string
+        description: "Ex.: 25–40 minutos."
       - name: fusoHorario
         label: Fuso horário
         type: string
+        description: "Para a maioria dos estabelecimentos de SP, use America/Sao_Paulo."
