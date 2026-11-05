@@ -47,6 +47,8 @@ node --test tests/*.test.mjs
 
 A publicação usa `.github/workflows/pages.yml`. O GitHub Pages deve usar **GitHub Actions** como origem. Somente arquivos públicos são enviados ao artifact; configurações e testes ficam no repositório.
 
-As fotos ilustrativas são servidas pelo Pexels; o rodapé informa “Imagens meramente ilustrativas”. O site mantém uma imagem local de reserva para a capa e um símbolo de reserva nos produtos.
+As fotos ilustrativas do Pexels estão salvas em `assets/originais/`, com caminhos locais para a prévia do CMS; o rodapé informa “Imagens meramente ilustrativas”. O site mantém uma imagem local de reserva para a capa e um símbolo de reserva nos produtos.
 
 A publicação usa somente leitura do código. A recuperação automática com commit não foi ativada: a revisão automática de permissões rejeitou a concessão permanente de escrita ao workflow.
+
+As fotos entregues com o site ficam em `assets/originais/`. Elas podem aparecer como foto atual do produto no editor, mas ficam fora da biblioteca de uploads do cliente. O campo mostra a foto real; para substituí-la, remova a seleção atual e envie ou selecione uma foto em `assets/uploads/`.
