@@ -4,14 +4,10 @@
     "categoria": "Burgers",
     "descricao": "Pão brioche, smash 120g, cheddar cremoso, picles e molho da casa.",
     "preco": 24.9,
-    "imagem": "/assets/originais/brasa-smash.jpg",
     "disponivel": true,
     "destaque": true,
     "etiqueta": "DA CASA",
-    "emoji": "🍔",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🍔"
   },
   {
     "nome": "Duplo Cheddar",
@@ -21,11 +17,7 @@
     "imagem": "/assets/originais/duplo-cheddar.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
-    "emoji": "🍔",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🍔"
   },
   {
     "nome": "Bacon da Casa",
@@ -35,11 +27,7 @@
     "imagem": "/assets/originais/bacon-da-casa.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
-    "emoji": "🥓",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🥓"
   },
   {
     "nome": "Veggie Crocante",
@@ -50,10 +38,7 @@
     "disponivel": true,
     "destaque": false,
     "etiqueta": "VEGGIE",
-    "emoji": "🥬",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🥬"
   },
   {
     "nome": "BBQ Crunch",
@@ -64,10 +49,7 @@
     "disponivel": true,
     "destaque": true,
     "etiqueta": "DA CASA",
-    "emoji": "🍔",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🍔"
   },
   {
     "nome": "Clássico da Brasa",
@@ -77,11 +59,7 @@
     "imagem": "/assets/originais/classico-da-brasa.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
-    "emoji": "🍔",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🍔"
   },
   {
     "nome": "Batata Rústica",
@@ -91,11 +69,7 @@
     "imagem": "/assets/originais/batata-rustica.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
-    "emoji": "🍟",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🍟"
   },
   {
     "nome": "Cheddar Fries",
@@ -105,11 +79,7 @@
     "imagem": "/assets/originais/cheddar-fries.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
-    "emoji": "🍟",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🍟"
   },
   {
     "nome": "Onion Rings",
@@ -119,11 +89,7 @@
     "imagem": "/assets/originais/onion-rings.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
-    "emoji": "🧅",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🧅"
   },
   {
     "nome": "Refrigerante Lata",
@@ -133,11 +99,7 @@
     "imagem": "/assets/originais/refrigerante-lata.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
-    "emoji": "🥤",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🥤"
   },
   {
     "nome": "Milk-shake da Casa",
@@ -147,9 +109,7 @@
     "imagem": "/assets/originais/milk-shake-da-casa.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
     "emoji": "🥤",
-    "precoPromocional": null,
     "variacoes": [
       {
         "nome": "Chocolate",
@@ -166,8 +126,7 @@
         "preco": 19.9,
         "disponivel": true
       }
-    ],
-    "adicionais": []
+    ]
   },
   {
     "nome": "Brownie Quentinho",
@@ -177,10 +136,6 @@
     "imagem": "/assets/originais/brownie-quentinho.jpg",
     "disponivel": true,
     "destaque": false,
-    "etiqueta": "",
-    "emoji": "🍫",
-    "precoPromocional": null,
-    "variacoes": [],
-    "adicionais": []
+    "emoji": "🍫"
   }
 ]
