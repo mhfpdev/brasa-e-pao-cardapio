@@ -1,0 +1,46 @@
+name: Validar e publicar cardápio
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cardapio-pages
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Conferir dados e fotos em uso
+        run: node scripts/validate-site.mjs
+      - name: Testar pedidos e horários
+        run: node --test tests/*.test.mjs
+      - name: Preparar arquivos públicos
+        run: |
+          mkdir _site
+          cp index.html styles.css app.js menu-core.mjs _site/
+          cp -R assets data _site/
+          find _site -name '.gitkeep' -delete
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,9 +1,65 @@
 {
-  "segunda": "",
-  "terca": "18:00-23:30",
-  "quarta": "18:00-23:30",
-  "quinta": "18:00-23:30",
-  "sexta": "18:00-02:00",
-  "sabado": "12:00-15:00; 18:00-02:00",
-  "domingo": "17:00-23:00"
+  "segunda": {
+    "fechado": true,
+    "intervalos": []
+  },
+  "terca": {
+    "fechado": false,
+    "intervalos": [
+      {
+        "abertura": "18:00",
+        "fechamento": "23:30"
+      }
+    ]
+  },
+  "quarta": {
+    "fechado": false,
+    "intervalos": [
+      {
+        "abertura": "18:00",
+        "fechamento": "23:30"
+      }
+    ]
+  },
+  "quinta": {
+    "fechado": false,
+    "intervalos": [
+      {
+        "abertura": "18:00",
+        "fechamento": "23:30"
+      }
+    ]
+  },
+  "sexta": {
+    "fechado": false,
+    "intervalos": [
+      {
+        "abertura": "18:00",
+        "fechamento": "02:00"
+      }
+    ]
+  },
+  "sabado": {
+    "fechado": false,
+    "intervalos": [
+      {
+        "abertura": "12:00",
+        "fechamento": "15:00"
+      },
+      {
+        "abertura": "18:00",
+        "fechamento": "02:00"
+      }
+    ]
+  },
+  "domingo": {
+    "fechado": false,
+    "intervalos": [
+      {
+        "abertura": "17:00",
+        "fechamento": "23:00"
+      }
+    ]
+  },
+  "excecoes": []
 }

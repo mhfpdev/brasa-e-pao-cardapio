@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <a class="skip-link" href="#cardapio">Ir para o cardápio</a>
   <div class="top-note"><span class="spark">✳</span> <span id="top-message">Sabor de verdade, feito na hora</span> <span class="spark">✳</span></div>
   <header class="site-header">
     <a href="#inicio" class="brand" aria-label="Brasa e Pão, voltar ao início">
@@ -33,15 +34,15 @@
       <div class="hero-background" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="hero-copy">
         <div class="eyebrow"><span class="eyebrow-line"></span> HAMBURGUERIA ARTESANAL <span class="eyebrow-line"></span></div>
-        <h1>O sabor que<br>acende a <span>fome.</span></h1>
-        <p id="hero-subtitle">Smash no ponto, pão macio e aquele sabor de brasa que dá vontade de voltar.</p>
+        <h1>Hambúrguer<br>feito na <em>hora.</em></h1>
+        <p id="hero-subtitle">Smash na chapa, pão brioche e molho da casa.</p>
         <div class="hero-actions"><a class="primary-btn" href="#cardapio">Explorar cardápio <span>↗</span></a><a class="hero-quiet" href="#funcionamento">Horários de funcionamento <span>→</span></a></div>
         <div class="hero-feature"><span class="mini-flame">✦</span> Ingredientes selecionados <span class="feature-dot">·</span> Feito na hora</div>
       </div>
       <div class="hero-photo" aria-hidden="true">
         <div class="photo-halo"></div>
         <img class="hero-local" src="./assets/hero-burger.svg" alt="" />
-        <img class="hero-external" src="https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="" loading="eager" onerror="this.style.opacity='0'" />
+        <img class="hero-external" src="https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="" loading="eager" fetchpriority="high" width="1100" height="800" onerror="this.style.opacity='0'" />
         <div class="hero-seal"><span>100%</span><small>SABOR<br>DE BRASA</small></div>
       </div>
     </section>
@@ -49,37 +50,42 @@
     <div class="benefits" aria-label="Destaques"><span><i>✺</i> Hambúrguer feito na hora</span><span><i>✺</i> Ingredientes de primeira</span><span><i>✺</i> Sabor de outro nível</span></div>
 
     <section id="cardapio" class="menu-section container">
-      <div class="section-intro"><div><span class="kicker">O QUE SAI DA NOSSA CHAPA</span><h2>Escolha sua<br><em>próxima paixão.</em></h2></div><p>Do clássico que não tem erro ao exagerado que vale cada mordida. Encontra o teu favorito.</p></div>
+      <div class="section-intro"><div><span class="kicker">O QUE SAI DA NOSSA CHAPA</span><h2>Monte seu<br><em>pedido.</em></h2></div><p>Escolha os hambúrgueres, acompanhamentos e bebidas para o seu pedido.</p></div>
+      <p id="business-notice" class="business-notice" role="status" hidden></p><p id="order-info" class="order-info"></p>
       <div class="menu-toolbar">
         <div class="filter-list" id="filters" role="group" aria-label="Filtrar por categoria"></div>
-        <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg><input type="search" id="search" placeholder="Buscar no cardápio..." aria-label="Pesquisar produtos" autocomplete="off"></label>
+        <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg><input type="search" id="search" placeholder="Buscar no cardápio…" aria-label="Pesquisar produtos" autocomplete="off"></label>
       </div>
-      <div class="menu-topline"><p id="result-label">Preparando nosso cardápio...</p><span>ESCOLHA & APROVEITE</span></div>
-      <div id="menu-grid" class="menu-grid" aria-live="polite"><div class="loading-products">Preparando o cardápio... <span>✳</span></div></div>
+      <div class="menu-topline"><p id="result-label">Preparando nosso cardápio…</p><span>ESCOLHA & APROVEITE</span></div>
+      <div id="menu-grid" class="menu-grid" aria-live="polite"><div class="loading-products">Preparando o cardápio… <span>✳</span></div></div>
     </section>
 
-    <section class="banner" id="sobre"><div class="banner-art"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="banner-spark">✳</span><div class="banner-stamp">F</div></div><div class="banner-copy"><span class="kicker light">NOSSO JEITO DE FAZER</span><h2>Não é só<br>hambúrguer.<br><em>É ritual.</em></h2><p>Chapa quente, ingredientes honestos e respeito por cada pedido. Aqui, a gente acredita que comida boa não precisa de complicação — só de capricho.</p><a href="#cardapio">Encontre seu favorito <span>↗</span></a></div></section>
+    <section class="banner" id="sobre"><div class="banner-art"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="banner-spark">✳</span><div class="banner-stamp">F</div></div><div class="banner-copy"><span class="kicker light">NOSSO JEITO DE FAZER</span><h2>Chapa quente.<br><em>Preparo cuidadoso.</em></h2><p>Chapa quente, ingredientes honestos e respeito por cada pedido. Aqui, a gente acredita que comida boa não precisa de complicação — só de capricho.</p><a href="#cardapio">Encontre seu favorito <span>↗</span></a></div></section>
 
-    <section id="funcionamento" class="hours-section container"><div><span class="kicker">BATEU A FOME?</span><h2>Deu a hora<br>da <em>brasa.</em></h2><p>Confere nossos horários e escolhe o melhor momento pra matar a vontade.</p><div class="open-pill" id="open-status"><span class="status-dot"></span> Consultando horários...</div></div><div class="hours-card"><div class="hours-card-head"><span>HORÁRIOS DA CASA</span><span>✳</span></div><div id="hours-list"><p>Carregando...</p></div><div class="hours-foot">Os horários podem mudar em feriados e datas especiais.</div></div></section>
+    <section id="funcionamento" class="hours-section container"><div><span class="kicker">BATEU A FOME?</span><h2>Deu a hora<br>da <em>brasa.</em></h2><p>Confira os dias e horários de atendimento.</p><div class="open-pill" id="open-status"><span class="status-dot"></span> Consultando horários…</div></div><div class="hours-card"><div class="hours-card-head"><span>HORÁRIOS DA CASA</span><span>✳</span></div><div id="hours-list"><p>Carregando…</p></div><div id="special-hours"></div><div class="hours-foot">Os horários podem mudar em feriados e datas especiais.</div></div></section>
   </main>
 
-  <footer><div class="footer-inner container"><div><div class="footer-brand">BRASA <em>&</em> PÃO<span>.</span></div><p>Feito com fogo. Servido com vontade.</p></div><div class="footer-right"><a href="#inicio">Voltar ao topo ↑</a><small>© <span id="year"></span> Brasa & Pão</small></div></div></footer>
+  <footer><div class="footer-inner container"><div><div class="footer-brand">BRASA <em>&</em> PÃO<span>.</span></div><p id="footer-tagline">Hambúrgueres feitos na hora.</p><p class="image-disclaimer">Imagens meramente ilustrativas.</p><div id="business-contact" class="business-contact"></div></div><div class="footer-right"><a href="#inicio">Voltar ao topo ↑</a><small>© <span id="year"></span> <span id="copyright-name">Brasa & Pão</span></small></div></div></footer>
 
   <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
-  <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
+  <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" inert>
     <div class="drawer-head"><div><small>SEU PEDIDO</small><h2 id="cart-title">Minha sacola <span id="drawer-count">(0)</span></h2></div><button id="close-cart" class="icon-button" aria-label="Fechar sacola">×</button></div>
     <div id="cart-items" class="drawer-items"></div>
     <div id="cart-checkout" class="drawer-checkout">
       <div class="delivery-types" role="group" aria-label="Tipo de pedido"><button data-method="retirada" class="selected" type="button">Retirar no local</button><button data-method="entrega" type="button">Entrega</button></div>
-      <label class="field-label">Seu nome <input id="customer-name" type="text" maxlength="70" placeholder="Como podemos te chamar?"></label>
-      <label class="field-label" id="address-wrap" hidden>Endereço para entrega <input id="customer-address" type="text" maxlength="220" placeholder="Rua, número, bairro e referência"></label>
-      <label class="field-label">Observações <textarea id="order-note" rows="2" maxlength="450" placeholder="Ex.: sem cebola, ponto da carne..."></textarea></label>
+      <label class="field-label">Seu nome <input id="customer-name" name="nome" autocomplete="name" type="text" maxlength="70" placeholder="Como podemos te chamar?"></label>
+      <label class="field-label" id="address-wrap" hidden>Endereço para entrega <input id="customer-address" name="endereco" autocomplete="street-address" type="text" maxlength="220" placeholder="Rua, número, bairro e referência"></label>
+      <label class="field-label" id="area-wrap" hidden>Bairro de entrega <select id="delivery-area" name="bairro"></select></label>
+      <label class="field-label" id="payment-wrap">Forma de pagamento <select id="payment" name="pagamento"></select></label>
+      <label class="field-label" id="change-wrap" hidden>Troco para (R$) <input id="change" name="troco" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Ex.: 100,00"></label>
+      <label class="field-label">Observações <textarea id="order-note" name="observacoes" rows="2" maxlength="450" placeholder="Ex.: sem cebola, ponto da carne…"></textarea></label>
       <div class="price-summary"><div><span>Subtotal</span><b id="cart-subtotal">R$ 0,00</b></div><div id="delivery-row" hidden><span>Entrega</span><b id="cart-delivery">R$ 0,00</b></div><div class="grand-total"><span>Total</span><strong id="cart-total">R$ 0,00</strong></div></div>
-      <button type="button" class="checkout-btn" id="checkout-btn">Copiar resumo do pedido <span>→</span></button><small class="checkout-hint">Confira o pedido antes de finalizar.</small>
+      <button type="button" class="checkout-btn" id="checkout-btn">Continuar no WhatsApp <span>→</span></button><p id="checkout-status" role="status" class="checkout-status"></p><small class="checkout-hint">Você confirma o envio e combina o pagamento no WhatsApp.</small>
     </div>
   </aside>
   <button class="mobile-cart" id="mobile-cart" type="button"><span>🛍 Sacola <b id="mobile-count">0</b></span><span id="mobile-cart-total">R$ 0,00</span></button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js" defer></script>
+  <dialog id="options-dialog" aria-labelledby="options-title"><div class="drawer-head"><h2 id="options-title"></h2><button type="button" id="close-options" class="icon-button" aria-label="Fechar opções">×</button></div><div class="options-body"><label class="field-label" id="variation-wrap">Escolha uma opção<select id="variation" name="variacao"></select></label><fieldset id="extras"></fieldset><button type="button" id="confirm-options" class="checkout-btn">Adicionar à sacola <span>+</span></button></div></dialog>
+  <script type="module" src="./app.js"></script>
 </body>
 </html>

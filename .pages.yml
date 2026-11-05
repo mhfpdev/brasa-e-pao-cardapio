@@ -1,136 +1,546 @@
-# Painel visual para o Pages CMS: https://app.pagescms.org/
-# O estabelecimento edita pelo celular; o Pages CMS salva as alterações no GitHub.
+# Biblioteca limitada a fotos do cliente; os arquivos originais não são expostos.
 media:
-  input: assets
-  output: /assets
-
+  - name: "fotos"
+    label: "Fotos enviadas pelo cliente"
+    input: "assets/uploads"
+    output: "/assets/uploads"
+    extensions:
+      - "jpg"
+      - "jpeg"
+      - "png"
+      - "webp"
+      - "gif"
+    rename: "random"
 content:
-  - name: produtos
-    label: Produtos do cardápio
-    type: file
-    path: data/produtos.json
-    format: json
+  - name: "produtos"
+    label: "Produtos — adicionar, editar ou remover"
+    type: "file"
+    path: "data/produtos.json"
+    format: "json"
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: "nome"
+        label: "Nome do produto"
+        type: "string"
+        required: true
+      - name: "categoria"
+        label: "Categoria"
+        type: "string"
+        required: true
+        description: "Escreva uma categoria existente ou crie outra, como Combos."
+      - name: "descricao"
+        label: "Descrição e ingredientes"
+        type: "text"
+      - name: "preco"
+        label: "Preço (R$)"
+        type: "number"
+        options:
+          min: 0
+        required: true
+      - name: "precoPromocional"
+        label: "Preço promocional (opcional)"
+        type: "number"
+        options:
+          min: 0
+        description: "Para produtos sem tamanhos ou sabores. Deixe vazio para usar o preço normal. Deve ser menor que o preço normal."
+      - name: "imagem"
+        label: "Foto do produto"
+        type: "image"
+        options:
+          media: "fotos"
+          extensions:
+            - "jpg"
+            - "jpeg"
+            - "png"
+            - "webp"
+            - "gif"
+      - name: "disponivel"
+        label: "Mostrar no cardápio"
+        type: "boolean"
+        default: true
+      - name: "destaque"
+        label: "Marcar como destaque"
+        type: "boolean"
+      - name: "etiqueta"
+        label: "Etiqueta da foto (opcional)"
+        type: "string"
+        description: "Ex.: NOVO ou DA CASA. Use apenas informações reais."
+      - name: "emoji"
+        label: "Símbolo caso a foto não abra"
+        type: "string"
+      - name: "variacoes"
+        label: "Tamanhos ou sabores"
+        type: "object"
+        list:
+          collapsible:
+            summary: "{nome}"
+        description: "Quando houver opções, o cliente escolhe uma. O preço de cada opção substitui o preço normal do produto."
+        fields:
+          - name: "nome"
+            label: "Nome da opção"
+            type: "string"
+            required: true
+          - name: "preco"
+            label: "Preço (R$)"
+            type: "number"
+            options:
+              min: 0
+            required: true
+          - name: "disponivel"
+            label: "Disponível"
+            type: "boolean"
+            default: true
+      - name: "adicionais"
+        label: "Adicionais opcionais"
+        type: "object"
+        list:
+          collapsible:
+            summary: "{nome}"
+        description: "O cliente pode selecionar os adicionais. Cada valor é somado ao produto."
+        fields:
+          - name: "nome"
+            label: "Nome da opção"
+            type: "string"
+            required: true
+          - name: "preco"
+            label: "Preço (R$)"
+            type: "number"
+            options:
+              min: 0
+            required: true
+          - name: "disponivel"
+            label: "Disponível"
+            type: "boolean"
+            default: true
     list: true
+  - name: "estabelecimento"
+    label: "Estabelecimento e pedidos"
+    type: "file"
+    path: "data/estabelecimento.json"
+    format: "json"
+    operations:
+      create: false
+      rename: false
+      delete: false
     fields:
-      - name: id
-        label: Código interno (sem espaços)
-        type: string
+      - name: "nome"
+        label: "Nome do estabelecimento"
+        type: "string"
         required: true
-        description: "Identificador único. Exemplo: x-bacon. Não altere depois de publicar."
-      - name: nome
-        label: Nome do produto
-        type: string
-        required: true
-      - name: categoria
-        label: Categoria
-        type: select
-        required: true
+      - name: "logo"
+        label: "Logotipo (opcional)"
+        type: "image"
         options:
-          values: [Burgers, Acompanhamentos, Bebidas, Sobremesas]
-      - name: descricao
-        label: Descrição
-        type: text
-        description: "Ingredientes e observações que aparecem abaixo do produto."
-      - name: preco
-        label: Preço (R$)
-        type: number
+          media: "fotos"
+          extensions:
+            - "jpg"
+            - "jpeg"
+            - "png"
+            - "webp"
+            - "gif"
+      - name: "fraseTopo"
+        label: "Frase da faixa superior"
+        type: "string"
+      - name: "tituloDestaque"
+        label: "Título principal"
+        type: "text"
+      - name: "descricaoDestaque"
+        label: "Texto de apresentação"
+        type: "text"
+      - name: "imagemDestaque"
+        label: "Foto principal"
+        type: "image"
+        options:
+          media: "fotos"
+          extensions:
+            - "jpg"
+            - "jpeg"
+            - "png"
+            - "webp"
+            - "gif"
+      - name: "tituloSobre"
+        label: "Título da seção sobre"
+        type: "text"
+      - name: "textoSobre"
+        label: "Texto sobre o estabelecimento"
+        type: "text"
+      - name: "fraseRodape"
+        label: "Frase do rodapé"
+        type: "string"
+      - name: "whatsapp"
+        label: "WhatsApp dos pedidos"
+        type: "string"
         required: true
-        description: "Use ponto para centavos. Ex.: 24.90."
+        pattern:
+          regex: "^[1-9][0-9]{10,14}$"
+          message: "Use país + DDD + número, apenas dígitos. Ex.: 5514981005730."
+        description: "Número público que recebe os pedidos."
+      - name: "telefone"
+        label: "Telefone de contato (opcional)"
+        type: "string"
+      - name: "email"
+        label: "E-mail de contato (opcional)"
+        type: "string"
+      - name: "instagram"
+        label: "Link do Instagram (opcional)"
+        type: "string"
+      - name: "mapa"
+        label: "Link do mapa (opcional)"
+        type: "string"
+      - name: "endereco"
+        label: "Endereço do estabelecimento"
+        type: "object"
+        fields:
+          - name: "logradouro"
+            label: "Rua ou avenida"
+            type: "string"
+          - name: "numero"
+            label: "Número"
+            type: "string"
+          - name: "complemento"
+            label: "Complemento"
+            type: "string"
+          - name: "bairro"
+            label: "Bairro"
+            type: "string"
+          - name: "cidade"
+            label: "Cidade"
+            type: "string"
+          - name: "estado"
+            label: "Estado"
+            type: "string"
+          - name: "cep"
+            label: "CEP"
+            type: "string"
+      - name: "pedidosAtivos"
+        label: "Receber pedidos"
+        type: "boolean"
+        description: "Desative para pausar a finalização dos pedidos."
+      - name: "mensagemPausa"
+        label: "Mensagem quando os pedidos estiverem pausados"
+        type: "text"
+      - name: "aceitarForaHorario"
+        label: "Aceitar pedidos fora do horário"
+        type: "boolean"
+        description: "Se desativado, o envio só é permitido durante o horário de funcionamento."
+      - name: "aviso"
+        label: "Aviso temporário no cardápio (opcional)"
+        type: "text"
+      - name: "entregaAtiva"
+        label: "Aceitar entrega"
+        type: "boolean"
+      - name: "retiradaAtiva"
+        label: "Aceitar retirada no local"
+        type: "boolean"
+      - name: "tempoPreparo"
+        label: "Prazo estimado de preparo"
+        type: "string"
+      - name: "areaEntrega"
+        label: "Descrição da região atendida"
+        type: "string"
+      - name: "taxaEntrega"
+        label: "Taxa padrão de entrega (R$)"
+        type: "number"
         options:
           min: 0
-      - name: imagem
-        label: Link ou caminho da foto
-        type: string
-        description: "Ex.: https://.../foto.jpg ou assets/foto.jpg. É possível enviar fotos na aba de mídia."
-      - name: disponivel
-        label: Produto disponível
-        type: boolean
-        description: "Desmarque para ocultar o produto do cardápio."
-      - name: destaque
-        label: Destaque
-        type: boolean
-        description: "Marca o produto como destaque na base de dados."
-      - name: etiqueta
-        label: Etiqueta na foto
-        type: string
-        description: "Opcional. Ex.: MAIS PEDIDO, DA CASA, NOVO. Deixe vazio para não mostrar."
-      - name: emoji
-        label: Emoji usado se a imagem falhar
-        type: string
-        description: "Ex.: 🍔 ou 🍟."
-
-  - name: horarios
-    label: Horários de funcionamento
-    type: file
-    path: data/horarios.json
-    format: json
-    fields:
-      - name: segunda
-        label: Segunda-feira
-        type: string
-        description: "Deixe vazio se estiver fechado. Se abrir: 18:00-23:00. Dois períodos: 12:00-14:00; 18:00-23:00. Se fechar após meia-noite: 18:00-02:00."
-      - name: terca
-        label: Terça-feira
-        type: string
-        description: "Ex.: 18:00-23:00. Para fechado, deixe vazio. Para dois períodos, separe com ponto e vírgula (;)."
-      - name: quarta
-        label: Quarta-feira
-        type: string
-        description: "Formato: HH:MM-HH:MM. Ex.: 18:00-23:00."
-      - name: quinta
-        label: Quinta-feira
-        type: string
-        description: "Formato: HH:MM-HH:MM. Pode separar períodos com ;."
-      - name: sexta
-        label: Sexta-feira
-        type: string
-        description: "Ex.: 18:00-02:00 indica que fecha às 2h de sábado."
-      - name: sabado
-        label: Sábado
-        type: string
-        description: "Ex.: 12:00-15:00; 18:00-02:00 para almoço e jantar."
-      - name: domingo
-        label: Domingo
-        type: string
-        description: "Se não abrir, deixe completamente vazio."
-
-  - name: estabelecimento
-    label: Informações da casa
-    type: file
-    path: data/estabelecimento.json
-    format: json
-    fields:
-      - name: nome
-        label: Nome do estabelecimento
-        type: string
-        required: true
-      - name: fraseTopo
-        label: Frase da faixa superior
-        type: string
-      - name: descricaoDestaque
-        label: Texto da página inicial
-        type: text
-      - name: whatsapp
-        label: WhatsApp que recebe pedidos
-        type: string
-        description: "Código do país + DDD + número, somente dígitos. Ex.: 5511999999999. Deixe vazio se quiser apenas copiar o pedido."
-      - name: taxaEntrega
-        label: Taxa de entrega em reais
-        type: number
-        description: "Ex.: 6.00."
+      - name: "pedidoMinimo"
+        label: "Pedido mínimo sem entrega (R$)"
+        type: "number"
         options:
           min: 0
-      - name: entregaAtiva
-        label: Aceita entrega
-        type: boolean
-      - name: retiradaAtiva
-        label: Aceita retirada no local
-        type: boolean
-      - name: tempoPreparo
-        label: Previsão de preparo
-        type: string
-        description: "Ex.: 25–40 minutos."
-      - name: fusoHorario
-        label: Fuso horário
-        type: string
-        description: "Para a maioria dos estabelecimentos de SP, use America/Sao_Paulo."
+      - name: "entregaGratisAcima"
+        label: "Entrega grátis a partir de (R$)"
+        type: "number"
+        options:
+          min: 0
+        description: "Use 0 para desativar."
+      - name: "areasEntrega"
+        label: "Bairros e taxas de entrega"
+        type: "object"
+        list:
+          collapsible:
+            summary: "{nome}"
+        description: "Se cadastrados, o cliente deve escolher um destes bairros. Vazio usa a taxa padrão."
+        fields:
+          - name: "nome"
+            label: "Bairro ou região"
+            type: "string"
+            required: true
+          - name: "taxa"
+            label: "Taxa (R$)"
+            type: "number"
+            options:
+              min: 0
+            required: true
+      - name: "pagamentos"
+        label: "Formas de pagamento"
+        type: "string"
+        list: true
+        description: "Ex.: Pix, Dinheiro, Cartão de crédito. Dinheiro habilita o campo de troco."
+      - name: "fusoHorario"
+        label: "Fuso horário"
+        type: "string"
+        description: "Ex.: America/Sao_Paulo."
+      - name: "avisoHorarios"
+        label: "Aviso abaixo dos horários"
+        type: "text"
+  - name: "horarios"
+    label: "Horários e feriados"
+    type: "file"
+    path: "data/horarios.json"
+    format: "json"
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: "segunda"
+        label: "Segunda-feira"
+        type: "object"
+        fields:
+          - name: "fechado"
+            label: "Fechado neste dia"
+            type: "boolean"
+          - name: "intervalos"
+            label: "Períodos de atendimento"
+            type: "object"
+            list:
+              collapsible:
+                summary: "{abertura} às {fechamento}"
+            fields:
+              - name: "abertura"
+                label: "Abre às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+              - name: "fechamento"
+                label: "Fecha às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+                description: "Se for após a meia-noite, informe o horário do dia seguinte. Ex.: 02:00."
+      - name: "terca"
+        label: "Terça-feira"
+        type: "object"
+        fields:
+          - name: "fechado"
+            label: "Fechado neste dia"
+            type: "boolean"
+          - name: "intervalos"
+            label: "Períodos de atendimento"
+            type: "object"
+            list:
+              collapsible:
+                summary: "{abertura} às {fechamento}"
+            fields:
+              - name: "abertura"
+                label: "Abre às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+              - name: "fechamento"
+                label: "Fecha às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+                description: "Se for após a meia-noite, informe o horário do dia seguinte. Ex.: 02:00."
+      - name: "quarta"
+        label: "Quarta-feira"
+        type: "object"
+        fields:
+          - name: "fechado"
+            label: "Fechado neste dia"
+            type: "boolean"
+          - name: "intervalos"
+            label: "Períodos de atendimento"
+            type: "object"
+            list:
+              collapsible:
+                summary: "{abertura} às {fechamento}"
+            fields:
+              - name: "abertura"
+                label: "Abre às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+              - name: "fechamento"
+                label: "Fecha às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+                description: "Se for após a meia-noite, informe o horário do dia seguinte. Ex.: 02:00."
+      - name: "quinta"
+        label: "Quinta-feira"
+        type: "object"
+        fields:
+          - name: "fechado"
+            label: "Fechado neste dia"
+            type: "boolean"
+          - name: "intervalos"
+            label: "Períodos de atendimento"
+            type: "object"
+            list:
+              collapsible:
+                summary: "{abertura} às {fechamento}"
+            fields:
+              - name: "abertura"
+                label: "Abre às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+              - name: "fechamento"
+                label: "Fecha às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+                description: "Se for após a meia-noite, informe o horário do dia seguinte. Ex.: 02:00."
+      - name: "sexta"
+        label: "Sexta-feira"
+        type: "object"
+        fields:
+          - name: "fechado"
+            label: "Fechado neste dia"
+            type: "boolean"
+          - name: "intervalos"
+            label: "Períodos de atendimento"
+            type: "object"
+            list:
+              collapsible:
+                summary: "{abertura} às {fechamento}"
+            fields:
+              - name: "abertura"
+                label: "Abre às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+              - name: "fechamento"
+                label: "Fecha às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+                description: "Se for após a meia-noite, informe o horário do dia seguinte. Ex.: 02:00."
+      - name: "sabado"
+        label: "Sábado"
+        type: "object"
+        fields:
+          - name: "fechado"
+            label: "Fechado neste dia"
+            type: "boolean"
+          - name: "intervalos"
+            label: "Períodos de atendimento"
+            type: "object"
+            list:
+              collapsible:
+                summary: "{abertura} às {fechamento}"
+            fields:
+              - name: "abertura"
+                label: "Abre às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+              - name: "fechamento"
+                label: "Fecha às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+                description: "Se for após a meia-noite, informe o horário do dia seguinte. Ex.: 02:00."
+      - name: "domingo"
+        label: "Domingo"
+        type: "object"
+        fields:
+          - name: "fechado"
+            label: "Fechado neste dia"
+            type: "boolean"
+          - name: "intervalos"
+            label: "Períodos de atendimento"
+            type: "object"
+            list:
+              collapsible:
+                summary: "{abertura} às {fechamento}"
+            fields:
+              - name: "abertura"
+                label: "Abre às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+              - name: "fechamento"
+                label: "Fecha às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+                description: "Se for após a meia-noite, informe o horário do dia seguinte. Ex.: 02:00."
+      - name: "excecoes"
+        label: "Feriados e datas especiais"
+        type: "object"
+        list:
+          collapsible:
+            summary: "{data}"
+        fields:
+          - name: "data"
+            label: "Data"
+            type: "string"
+            required: true
+            pattern:
+              regex: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              message: "Use AAAA-MM-DD. Ex.: 2026-12-25."
+          - name: "observacao"
+            label: "Descrição (opcional)"
+            type: "string"
+          - name: "fechado"
+            label: "Fechado neste dia"
+            type: "boolean"
+          - name: "intervalos"
+            label: "Períodos de atendimento"
+            type: "object"
+            list:
+              collapsible:
+                summary: "{abertura} às {fechamento}"
+            fields:
+              - name: "abertura"
+                label: "Abre às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+              - name: "fechamento"
+                label: "Fecha às"
+                type: "string"
+                required: true
+                pattern:
+                  regex: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+                  message: "Use o formato 24 horas: 18:00."
+                description: "Se for após a meia-noite, informe o horário do dia seguinte. Ex.: 02:00."
+settings:
+  hide: true

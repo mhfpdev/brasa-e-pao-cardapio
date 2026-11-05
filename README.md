@@ -1,63 +1,52 @@
-# Brasa & Pão — cardápio digital
+# Brasa & Pão — cardápio
 
-Site estático responsivo de uma hamburgueria **fictícia**. A página pública foi escrita como a de um estabelecimento de verdade, sem avisos de portfólio. Os preços, produtos e horários são dados de exemplo. Não há número real configurado para receber pedidos.
+Cardápio de um estabelecimento fictício para apresentação. Publicado no GitHub Pages em https://mhfpdev.github.io/brasa-e-pao-cardapio/.
 
-## Arquivos
+## Edição pelo celular
 
-- `index.html`, `styles.css`, `app.js`: site público e sacola de pedidos.
-- `data/produtos.json`: catálogo e valores.
-- `data/estabelecimento.json`: nome, mensagem, WhatsApp e entrega.
-- `data/horarios.json`: horários por dia.
-- `.pages.yml`: painel visual para editar os três arquivos no **Pages CMS**.
-- `netlify.toml`: configuração opcional de publicação na Netlify.
+Entre em https://app.pagescms.org/ com a conta autorizada para este repositório, abra `mhfpdev/brasa-e-pao-cardapio` e selecione a branch `main`.
 
-## Testar localmente
+- **Produtos — adicionar, editar ou remover:** adicione itens à lista, edite nome, ingredientes, categoria, preço, promoção e foto; remova itens ou desative “Mostrar no cardápio”. A ordem da lista define a ordem no site. A categoria é livre e cria o filtro automaticamente. O identificador é gerado a partir do nome, sem campo de código interno.
+- **Tamanhos ou sabores:** cada opção tem nome, preço completo e disponibilidade. O cliente escolhe uma opção antes de adicionar.
+- **Adicionais:** nome, valor adicional e disponibilidade. Selecionados na sacola, seus valores entram no total e na mensagem.
+- **Estabelecimento e pedidos:** nome, logotipo, apresentação, textos, foto principal, WhatsApp, contatos, redes sociais, endereço, mapa, pausa de pedidos, aviso temporário, entrega e retirada, prazo, pedido mínimo, taxas por bairro, entrega grátis, pagamentos e fuso horário.
+- **Horários e feriados:** marque os dias fechados e cadastre um ou mais períodos por dia. `18:00` a `02:00` fecha no dia seguinte. Datas especiais substituem a programação semanal; uma data marcada como fechada também encerra a extensão da madrugada anterior.
+- **Fotos enviadas pelo cliente:** envie JPG, PNG, WebP ou GIF pelo celular. Os arquivos ficam em `assets/uploads/`, recebem nomes aleatórios e o seletor preenche o caminho no produto. Os arquivos originais fora dessa pasta não aparecem na biblioteca.
 
-A página carrega os JSON com `fetch()`, por isso **não** abra o `index.html` diretamente via `file://`. Rode um servidor local na pasta:
+Salve no CMS. O GitHub valida os dados, confere as fotos em uso e publica a atualização. A execução aparece na aba **Actions**. Se houver erro de validação, a última versão válida permanece publicada.
 
-```bash
-python -m http.server 8000
-```
+## Proteção das fotos
 
-Depois acesse `http://localhost:8000`.
+A configuração do Pages CMS não oferece uma trava condicional de exclusão baseada nas referências do site. A proteção deste projeto ocorre no fluxo de publicação:
 
-## Publicar e editar pelo celular
+1. Antes de publicar, identifica as fotos referenciadas nos produtos, logotipo e foto principal.
+2. Se uma foto em uso foi removida, bloqueia a nova publicação e mantém a versão pública anterior no ar. Para liberar a publicação, restaure o arquivo pelo histórico Git ou troque a foto no cadastro. O Pages CMS hospedado ainda permite excluir o arquivo no painel: esta proteção atua antes do deploy.
+3. Fotos do cliente sem referência podem ser excluídas normalmente. A falta dos dois arquivos originais necessários ao layout também bloqueia o deploy.
+4. Uploads com assinatura de arquivo incompatível, formato não permitido ou tamanho acima de 8 MB bloqueiam a publicação. O CMS filtra extensões; a checagem de conteúdo e tamanho ocorre no GitHub.
+5. Arquivos JSON do cardápio não podem ser apagados nem renomeados pela interface configurada. Itens dentro da lista de produtos podem ser removidos.
 
-1. Crie um **repositório novo e público** no GitHub e envie o conteúdo desta pasta (incluindo `.pages.yml` e `data/`).
-2. Na **Netlify**, conecte o repositório GitHub em **Add new project → Import an existing project**. Como é um site estático, não há comando de build e o diretório publicado é a raiz (`.`).
-3. No **[Pages CMS](https://app.pagescms.org/)**, entre com a conta GitHub, autorize o aplicativo para esse repositório e abra-o.
-4. O painel mostrará **Produtos do cardápio**, **Horários de funcionamento** e **Informações da casa**. Edite e salve; o CMS criará um commit no repositório e a Netlify publicará automaticamente após o deploy.
-5. Para fotos próprias, envie-as para a pasta `assets` e use o caminho `assets/nome-da-foto.jpg` no campo `imagem` do produto.
-
-> Quem edita pelo Pages CMS precisa de autorização GitHub (ou convite como colaborador). Visitantes podem ver o site, mas não alterar o catálogo publicado.
-
-## Horários
-
-O arquivo `data/horarios.json` aceita **vários intervalos** separados por `;`:
-
-```json
-{
-  "segunda": "",
-  "terca": "00:00-00:30; 17:00-23:59",
-  "sexta": "18:00-02:00"
-}
-```
-
-- Vazio (`""`) = fechado.
-- Sempre use `HH:MM-HH:MM` em formato 24 horas.
-- `18:00-02:00` fecha às 02h **do dia seguinte**.
-- O indicador “aberto agora” respeita o fuso configurado em `data/estabelecimento.json`.
+A pasta separa arquivos entregues e uploads futuros; não representa propriedade individual por pessoa. Administradores com acesso direto ao GitHub continuam tendo as permissões do repositório. O histórico permite recuperar alterações. As verificações de imagem não substituem um antivírus.
 
 ## Pedidos
 
-Sem WhatsApp configurado, o carrinho **copia o resumo do pedido** para a área de transferência. Para usar a abertura de conversa no WhatsApp, preencha `whatsapp` em `data/estabelecimento.json` com um número realmente pertencente ao estabelecimento, usando apenas dígitos. O cliente confirma o envio no WhatsApp.
+O botão **Continuar no WhatsApp** abre a conversa de `+55 14 98100-5730`, configurado pelo proprietário para a apresentação, com a mensagem pronta. O cliente toca em enviar no WhatsApp; não há cópia de resumo nem envio automático.
 
-Nenhum pagamento ou compra é processado no site. Os dados digitados no carrinho são usados apenas no navegador do cliente para compor a mensagem do pedido.
+A mensagem contém produtos, opções, adicionais, quantidades, subtotal, entrega, total, modalidade, nome, endereço quando há entrega, pagamento, troco e observações. Os valores são calculados em centavos. Produtos removidos ou indisponíveis são descartados da sacola ao recarregar; renomear um produto também remove sua versão antiga da sacola.
 
-## Hospedagem
+O CMS gerencia conteúdo e regras do cardápio. Não é um sistema de caixa: não processa pagamentos, reserva estoque, armazena clientes, recebe pedidos num banco de dados ou oferece acompanhamento de pedidos. A confirmação do atendimento e do pagamento acontece pelo WhatsApp.
 
-GitHub é utilizado aqui para armazenar o código e permitir a edição via Pages CMS. Para uso comercial que envolva facilitar pedidos, **prefira hospedagem apropriada**, como Netlify, em vez do GitHub Pages; os termos do GitHub Pages restringem sites principalmente destinados a facilitar transações comerciais.
+## Desenvolvimento
 
-## Créditos das imagens
+Sem dependências de build:
 
-Fotos ilustrativas servidas a partir de [Pexels](https://www.pexels.com/), sob a licença de uso da plataforma. Substitua pelas fotos reais do estabelecimento antes de usar comercialmente. As imagens são carregadas pela internet; se uma imagem não abrir, o cardápio mostra um emoji de reserva.
+```sh
+python3 -m http.server 8000
+node scripts/validate-site.mjs
+node --test tests/*.test.mjs
+```
+
+A publicação usa `.github/workflows/pages.yml`. O GitHub Pages deve usar **GitHub Actions** como origem. Somente arquivos públicos são enviados ao artifact; configurações e testes ficam no repositório.
+
+As fotos ilustrativas são servidas pelo Pexels; o rodapé informa “Imagens meramente ilustrativas”. O site mantém uma imagem local de reserva para a capa e um símbolo de reserva nos produtos.
+
+A publicação usa somente leitura do código. A recuperação automática com commit não foi ativada: a revisão automática de permissões rejeitou a concessão permanente de escrita ao workflow.
