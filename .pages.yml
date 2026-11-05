@@ -1,0 +1,127 @@
+media:
+  input: assets
+  output: /assets
+
+content:
+  - name: produtos
+    label: Produtos do cardápio
+    type: file
+    path: data/produtos.json
+    format: json
+    list: true
+    fields:
+      - name: id
+        label: Código interno (sem espaços)
+        type: string
+        required: true
+        description: "Identificador único. Exemplo: x-bacon. Não altere depois de publicar."
+      - name: nome
+        label: Nome do produto
+        type: string
+        required: true
+      - name: categoria
+        label: Categoria
+        type: select
+        required: true
+        options:
+          values: [Burgers, Acompanhamentos, Bebidas, Sobremesas]
+      - name: descricao
+        label: Descrição
+        type: text
+        description: "Ingredientes e observações que aparecem abaixo do produto."
+      - name: preco
+        label: Preço (R$)
+        type: number
+        required: true
+        options:
+          min: 0
+      - name: imagem
+        label: Link ou caminho da foto
+        type: string
+        description: "Ex.: https://.../foto.jpg ou assets/foto.jpg."
+      - name: disponivel
+        label: Produto disponível
+        type: boolean
+        description: "Desmarque para ocultar o produto."
+      - name: destaque
+        label: Destaque
+        type: boolean
+      - name: etiqueta
+        label: Etiqueta na foto
+        type: string
+      - name: emoji
+        label: Emoji de reserva
+        type: string
+
+  - name: horarios
+    label: Horários de funcionamento
+    type: file
+    path: data/horarios.json
+    format: json
+    fields:
+      - name: segunda
+        label: Segunda-feira
+        type: string
+        description: "Vazio significa fechado. Ex.: 18:00-23:00. Dois períodos: 12:00-14:00; 18:00-23:00."
+      - name: terca
+        label: Terça-feira
+        type: string
+        description: "Use HH:MM-HH:MM. Separe períodos com ponto e vírgula."
+      - name: quarta
+        label: Quarta-feira
+        type: string
+        description: "Vazio significa fechado."
+      - name: quinta
+        label: Quinta-feira
+        type: string
+        description: "Ex.: 18:00-23:30."
+      - name: sexta
+        label: Sexta-feira
+        type: string
+        description: "18:00-02:00 fecha às 2h do dia seguinte."
+      - name: sabado
+        label: Sábado
+        type: string
+        description: "Ex.: 12:00-15:00; 18:00-02:00."
+      - name: domingo
+        label: Domingo
+        type: string
+        description: "Vazio significa fechado."
+
+  - name: estabelecimento
+    label: Informações da casa
+    type: file
+    path: data/estabelecimento.json
+    format: json
+    fields:
+      - name: nome
+        label: Nome do estabelecimento
+        type: string
+        required: true
+      - name: fraseTopo
+        label: Frase da faixa superior
+        type: string
+      - name: descricaoDestaque
+        label: Texto da página inicial
+        type: text
+      - name: whatsapp
+        label: WhatsApp que recebe pedidos
+        type: string
+        description: "Apenas dígitos com país e DDD. Deixe vazio para copiar o pedido."
+      - name: taxaEntrega
+        label: Taxa de entrega em reais
+        type: number
+        options:
+          min: 0
+      - name: entregaAtiva
+        label: Aceita entrega
+        type: boolean
+      - name: retiradaAtiva
+        label: Aceita retirada
+        type: boolean
+      - name: tempoPreparo
+        label: Previsão de preparo
+        type: string
+      - name: fusoHorario
+        label: Fuso horário
+        type: string
